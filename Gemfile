@@ -15,6 +15,9 @@ gem 'bcrypt'
 gem 'rexml'
 gem 'letter_opener_web'
 gem 'faker'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'mimemagic', '0.3.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do

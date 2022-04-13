@@ -18,7 +18,9 @@
 
   <div class="field">
     <%= form.label :feed %>
-    <%= form.text_area :feed %>
+    <%= image_tag(blog.feed.url) if blog.feed && blog.feed.url %>
+    <%= form.file_field :feed %>
+    <%= form.hidden_field :feed_cache %>
   </div>
 
   <div class="actions">
