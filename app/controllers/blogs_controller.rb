@@ -16,11 +16,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/new
   def new
-    if params[:back]
-      @blog = Blog.new(blog_params)
-    else
       @blog = Blog.new
-    end
   end
 
   # GET /blogs/1/edit
@@ -30,16 +26,15 @@ class BlogsController < ApplicationController
   # POST /blogs or /blogs.json
   def create
     @blog = current_user.blogs.build(blog_params)
-
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
-        format.json { render :show, status: :created, location: @blog }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
-      end
+    if params[:back]
+      render :new
+    else
+    if @blog.save
+      redirect_to blogs_path, notice: "Blog was successfully created."      
+    else
+     render :new
     end
+   end
   end
 
   # PATCH/PUT /blogs/1 or /blogs/1.json
@@ -66,6 +61,7 @@ class BlogsController < ApplicationController
   end
   def confirm
     @blog = current_user.blogs.build(blog_params)
+    render :new if @blog.invalid?
   end
   private
     # Use callbacks to share common setup or constraints between actions.
