@@ -1,4 +1,4 @@
-<%= form_with(model: blog, local: true) do |form| %>
+<%= form_with(model: blog, local: true ,url: if action_name == 'new' then confirm_blogs_path else blog_path end) do |form| %>
   <% if blog.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
@@ -20,11 +20,12 @@
     <%= form.label :feed %>
     <%= form.text_area :feed %>
   </div>
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div> 
 
+  <%= form.label :image %>
+    <%= image_tag(blog.image.url) if blog.image && blog.image.url %>
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
