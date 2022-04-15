@@ -8,6 +8,7 @@
       <th>Title</th>
       <th>Feed</th>
       <th>Username</th>
+      <th>Image</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= blog.title %></td>
         <td><%= blog.feed %></td>
         <td><%= blog.user.name if blog.user %></td>
+        <td><%= image_tag blog.image.url %></td>
         <td><%= link_to 'Show', blog %></td>
         <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
